@@ -27,3 +27,19 @@ model Role {
   users     User[]   
 }
 
+model MeterData {
+  id        Int      @id @default(autoincrement())
+  meter_id  Int
+  timestamp DateTime
+  tagName   String
+  value     Float
+  unit      String
+  meter     Meters   @relation(fields: [meter_id], references: [id])
+}
+
+model Meters {
+  id        Int      @id @default(autoincrement())
+  name      String
+  location  String
+  data      MeterData[]
+}
